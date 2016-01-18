@@ -1,5 +1,7 @@
 package taxiFare
 
+type calFare func(float64) float64
+
 func DisCal(d float64) float64{
 	var f float64
 	if d <= 2 {
@@ -18,6 +20,6 @@ func TimeCal(t float64) float64{
 	return (t * 0.25)
 }
 
-func TotalCal(d, t float64) float64{
-	return RoundPlus(DisCal(d) + TimeCal(t), 2)
+func TotalCal(d float64, t float64, DisFn calFare, TimeFn calFare) float64{
+	return RoundPlus(DisFn(d) + TimeFn(t), 2)
 }
