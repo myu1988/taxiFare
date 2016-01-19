@@ -6,7 +6,6 @@ type TaxiFareOOP struct{
 
 func (t TaxiFareOOP) DisCal() float64{
 	return DisCal(t.Distance)
-	
 }
 
 func (t TaxiFareOOP) TimeCal() float64{
