@@ -4,20 +4,20 @@ type calFare func(float64) float64
 
 func DisCal(d float64) float64{
 	var f float64
-	if d <= 2 {
-		f = 6
+	if d <= flagDownDis {
+		f = flagDownFare
 	}
-	if d > 2 && d < 8 {
-		f = (6 + (d - 2) * 1.5)
+	if d > flagDownDis && d < fareIncreaseDis {
+		f = (flagDownFare + (d - flagDownDis) * farePerKilometer)
 	}
-	if d > 8 {
-		f = (6 + 6 * 1.5 + (d - 8) * 1.5 * 1.5)
+	if d >= fareIncreaseDis {
+		f = (flagDownFare + (fareIncreaseDis - flagDownDis) * farePerKilometer + (d - fareIncreaseDis) * farePerKilometer * (1 + fareIncreasePercent))
 	}
 	return f
 }
 
 func TimeCal(t float64) float64{
-	return (t * 0.25)
+	return (t * farePerMinute)
 }
 
 func TotalCal(d float64, t float64, DisFn calFare, TimeFn calFare) float64{
